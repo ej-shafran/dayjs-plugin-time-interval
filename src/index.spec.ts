@@ -1,4 +1,4 @@
-import { describe } from "vitest";
+import { describe, expect } from "vitest";
 import fc from "fast-check";
 import { it } from "@fast-check/vitest";
 
@@ -63,12 +63,13 @@ const intervalAndPositiveDurationProp = it.prop([
 ]);
 
 describe("dayjs.timeInterval", () => {
+  intervalProp("should recreate `TimeInterval`s from ISO string", (interval) =>
+    dayjs.timeInterval(interval.toISOString()).isSame(interval),
+  );
+
   dayjsPairProp(
     "should create `TimeInterval`s from `start` and `end`",
-    (start, end) => {
-      const timeInterval = dayjs.timeInterval({ start, end });
-      return dayjs.isTimeInterval(timeInterval);
-    },
+    (start, end) => dayjs.isTimeInterval(dayjs.timeInterval({ start, end })),
   );
 
   dayjsAndDurationProp(
