@@ -53,6 +53,10 @@ const dayjsAndPositiveDurationProp = it.prop([
   positiveDurationArb(),
 ]);
 const intervalProp = it.prop([intervalArb()]);
+const intervalAndNonZeroDurationProp = it.prop([
+  intervalArb(),
+  durationArb(fc.integer().filter(Boolean)),
+]);
 const intervalAndPositiveDurationProp = it.prop([
   intervalArb(),
   positiveDurationArb(),
@@ -108,12 +112,12 @@ function describeWithFunction(kind: "start" | "end") {
   ) => interval[withFunction]((startOrEnd) => startOrEnd.add(duration));
 
   describe(`TimeInterval.${withFunction}`, () => {
-    intervalAndPositiveDurationProp(
+    intervalAndNonZeroDurationProp(
       `should return a different value for ${kind}`,
       (interval, duration) =>
         !modify(interval, duration)[kind].isSame(interval[kind]),
     );
-    intervalAndPositiveDurationProp(
+    intervalAndNonZeroDurationProp(
       `should return the same value for ${otherKind}`,
       (interval, duration) =>
         modify(interval, duration)[otherKind].isSame(interval[otherKind]),
@@ -124,6 +128,24 @@ function describeWithFunction(kind: "start" | "end") {
 describeWithFunction("start");
 
 describeWithFunction("end");
+
+describe("TimeInterval.isSame", () => {
+  intervalProp("should return `true` for itself", (interval) =>
+    interval.isSame(interval),
+  );
+
+  intervalAndNonZeroDurationProp(
+    "should return `false` for a modified start",
+    (interval, duration) =>
+      !interval.isSame(interval.withStart((start) => start.add(duration))),
+  );
+
+  intervalAndNonZeroDurationProp(
+    "should return `false` for a modified end",
+    (interval, duration) =>
+      !interval.isSame(interval.withEnd((end) => end.add(duration))),
+  );
+});
 
 describe("TimeInterval.includes", () => {
   intervalProp("should include its start", (interval) =>
