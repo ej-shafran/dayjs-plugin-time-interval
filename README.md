@@ -61,11 +61,9 @@ const endsLater = interval.withEnd((end) => end.add(5, "minutes"));
 interval.overlaps(startsLater, "minutes"); // true
 interval.overlaps(endsLater.withStart(interval.end), "minutes"); // false
 
-// Get as a JSON string
-interval.toJSON(); // '{"start":"ISO String","end":"ISO String"}'
-
 // Get as an ISO string
 interval.toISOString(); // "ISO String/ISO String"
+interval.toJSON(); // "ISO String/ISO String"
 
 // Get both start and end formatted
 interval.format("HH:mm:ss"); // { start: "HH:mm:ss", end: "HH:mm:ss" }

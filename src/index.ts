@@ -124,10 +124,7 @@ class TimeInterval implements plugin.TimeInterval {
   }
 
   toJSON(): string {
-    return JSON.stringify({
-      start: this.start.toJSON(),
-      end: this.end.toJSON(),
-    });
+    return this.toISOString();
   }
   toISOString(): string {
     return `${this.start.toISOString()}/${this.end.toISOString()}`;
