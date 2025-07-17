@@ -79,7 +79,7 @@ class TimeInterval implements plugin.TimeInterval {
   ) {}
 
   get duration(): duration.Duration {
-    return dayjs.duration(this.start.diff(this.end));
+    return dayjs.duration(this.end.diff(this.start));
   }
 
   clone(): plugin.TimeInterval {
