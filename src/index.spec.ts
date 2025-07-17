@@ -1,4 +1,4 @@
-import { describe, expect } from "vitest";
+import { describe } from "vitest";
 import fc from "fast-check";
 import { it } from "@fast-check/vitest";
 
