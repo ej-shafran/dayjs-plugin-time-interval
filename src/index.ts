@@ -9,6 +9,11 @@ const plugin: dayjs.PluginFunc = (_options, _dayjsClass, dayjsFactory) => {
   }
 
   dayjsFactory.timeInterval = function (config) {
+    if (typeof config === "string") {
+      const [start, end] = config.split("/");
+      return new TimeInterval(dayjs(start), dayjs(end));
+    }
+
     return new TimeInterval(
       "start" in config
         ? dayjs(config.start)
@@ -69,6 +74,10 @@ declare namespace plugin {
 export default plugin;
 
 declare module "dayjs" {
+  export function timeInterval(
+    config: string,
+    format?: string,
+  ): plugin.TimeInterval;
   export function timeInterval(config: plugin.ConfigType): plugin.TimeInterval;
   export function isTimeInterval(t: unknown): t is plugin.TimeInterval;
 }
@@ -124,10 +133,7 @@ class TimeInterval implements plugin.TimeInterval {
   }
 
   toJSON(): string {
-    return JSON.stringify({
-      start: this.start.toJSON(),
-      end: this.end.toJSON(),
-    });
+    return this.toISOString();
   }
   toISOString(): string {
     return `${this.start.toISOString()}/${this.end.toISOString()}`;
