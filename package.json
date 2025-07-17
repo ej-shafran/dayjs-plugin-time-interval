@@ -58,10 +58,11 @@
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.37.0",
-    "vitest": "^3.2.4"
-  },
-  "dependencies": {
+    "vitest": "^3.2.4",
     "dayjs": "^1.11.13"
+  },
+  "peerDependencies": {
+    "dayjs": "^1"
   },
   "packageManager": "pnpm@10.13.1+sha256.0f9ed48d808996ae007835fb5c4641cf9a300def2eddc9e957d9bbe4768c5f28"
 }
