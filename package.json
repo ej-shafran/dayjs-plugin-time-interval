@@ -35,6 +35,8 @@
   },
   "scripts": {
     "test": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build": "tsup",

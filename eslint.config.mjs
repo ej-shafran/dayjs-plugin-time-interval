@@ -11,4 +11,7 @@ export default tseslint.config(
       "@typescript-eslint/no-namespace": "off",
     },
   },
+  {
+    ignores: ["dist/*"],
+  },
 );
