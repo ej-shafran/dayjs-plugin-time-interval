@@ -41,6 +41,7 @@ declare namespace plugin {
     clone(): TimeInterval;
 
     isValid(unit?: dayjs.OpUnitType): boolean;
+    isSame(other: TimeInterval, unit?: dayjs.OpUnitType): boolean;
     overlaps(other: TimeInterval, unit?: dayjs.OpUnitType): boolean;
     includes(d: dayjs.ConfigType, unit?: dayjs.OpUnitType): boolean;
     withStart(
@@ -88,6 +89,11 @@ class TimeInterval implements plugin.TimeInterval {
 
   isValid(unit?: dayjs.OpUnitType): boolean {
     return this.start.isBefore(this.end, unit);
+  }
+  isSame(other: plugin.TimeInterval, unit?: dayjs.OpUnitType): boolean {
+    return (
+      this.start.isSame(other.start, unit) && this.end.isSame(other.end, unit)
+    );
   }
   overlaps(other: plugin.TimeInterval, unit?: dayjs.OpUnitType): boolean {
     return (
