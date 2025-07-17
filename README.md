@@ -7,7 +7,7 @@ A Dayjs plugin to add support for time intervals, as described in [ISO 8601](htt
 To install, use your favorite package manager:
 
 ```bash
-npm install --save-dev dayjs dayjs-plugin-time-interval
+npm install dayjs dayjs-plugin-time-interval
 ```
 
 Then, to setup, call `dayjs.extend` with the plugin:
