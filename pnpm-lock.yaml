@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      dayjs:
-        specifier: ^1.11.13
-        version: 1.11.13
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.18.2
@@ -30,6 +26,9 @@ importers:
       '@eslint/js':
         specifier: ^9.31.0
         version: 9.31.0
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
       eslint:
         specifier: ^9.31.0
         version: 9.31.0(jiti@2.4.2)
